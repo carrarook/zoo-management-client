@@ -20,8 +20,14 @@ const AnimalList = () => {
   const fetchAnimais = async () => {
     setLoading(true);
     try {
-      const data = await getAnimais();
-      setAnimais(data);
+      const response = await getAnimais();
+      console.log(response);  
+      
+      if (Array.isArray(response['$values'])) {
+        setAnimais(response['$values']);  // Atualiza o estado com o array de animais
+      } else {
+        setError('Formato de dados inválido.');
+      }
     } catch (err) {
       setError('Falha ao carregar a lista de animais.');
     } finally {

@@ -9,13 +9,17 @@ const AnimalCuidadoList = ({ animalId, animalCuidados, allCuidados }) => {
   const [cuidadoToRemove, setCuidadoToRemove] = useState(null);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
   const { loading, setLoading, setError, showNotification } = useAppContext();
-  
+
+  // Garantir que animalCuidados e allCuidados sejam arrays
+  const safeAnimalCuidados = Array.isArray(animalCuidados) ? animalCuidados : [];
+  const safeAllCuidados = Array.isArray(allCuidados) ? allCuidados : [];
+
   // Filtrar cuidados disponíveis (não associados ainda)
-  const associatedCuidadoIds = animalCuidados.map(ac => 
+  const associatedCuidadoIds = safeAnimalCuidados.map(ac => 
     ac.cuidado ? ac.cuidado.id : ac.cuidadoId
   );
-  
-  const availableCuidados = allCuidados.filter(cuidado => 
+
+  const availableCuidados = safeAllCuidados.filter(cuidado => 
     !associatedCuidadoIds.includes(cuidado.id)
   );
 
@@ -25,8 +29,6 @@ const AnimalCuidadoList = ({ animalId, animalCuidados, allCuidados }) => {
     setLoading(true);
     try {
       await addCuidadoToAnimal(animalId, selectedCuidado);
-      
-      // Recarregar a página para mostrar as alterações
       showNotification('Cuidado adicionado com sucesso!');
       window.location.reload();
     } catch (err) {
@@ -47,7 +49,6 @@ const AnimalCuidadoList = ({ animalId, animalCuidados, allCuidados }) => {
     try {
       await removeCuidadoFromAnimal(animalId, cuidadoToRemove.id || cuidadoToRemove.cuidadoId);
       showNotification('Cuidado removido com sucesso!');
-      // Recarregar a página para mostrar as alterações
       window.location.reload();
     } catch (err) {
       setError('Falha ao remover cuidado do animal.');
@@ -64,12 +65,11 @@ const AnimalCuidadoList = ({ animalId, animalCuidados, allCuidados }) => {
   };
 
   // Obter cuidados associados para exibição
-  const cuidadosAssociados = animalCuidados.map(ac => {
+  const cuidadosAssociados = safeAnimalCuidados.map(ac => {
     if (ac.cuidado) {
       return ac.cuidado;
     }
-    // Caso o objeto não tenha cuidado aninhado
-    return allCuidados.find(c => c.id === ac.cuidadoId) || { id: ac.cuidadoId, nome: 'Cuidado não encontrado' };
+    return safeAllCuidados.find(c => c.id === ac.cuidadoId) || { id: ac.cuidadoId, nome: 'Cuidado não encontrado' };
   });
 
   return (
@@ -145,5 +145,6 @@ const AnimalCuidadoList = ({ animalId, animalCuidados, allCuidados }) => {
     </div>
   );
 };
+
 
 export default AnimalCuidadoList;
