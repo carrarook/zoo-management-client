@@ -1,0 +1,129 @@
+/* Estilos gerais da seção */
+.animal-cuidados-section {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .animal-cuidados-section h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  /* Estilo do formulário de adição de cuidado */
+  .add-cuidado-form {
+    margin-bottom: 20px;
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .form-control {
+    padding: 8px;
+    width: 60%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  button.btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button.btn-success {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  button.btn-success:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  button.btn-danger {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  button.btn-sm {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+  
+  /* Estilo da tabela de cuidados associados */
+  .table-responsive {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .data-table th, .data-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .data-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .data-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .no-data-message {
+    font-size: 16px;
+    color: #888;
+    margin-top: 20px;
+  }
+  
+  /* Estilo do dialog de confirmação */
+  .confirm-dialog {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .confirm-dialog button {
+    margin: 5px;
+  }
+  
+  .confirm-dialog .confirm-button {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .confirm-dialog .cancel-button {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  /* Mensagens de erro e notificação */
+  .error-message {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .success-message {
+    color: #28a745;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
