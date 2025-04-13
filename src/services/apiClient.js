@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Cria uma instância do axios com a URL base da API
 const apiClient = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'https://localhost:7258/api',
+  baseURL: process.env.REACT_APP_API_URL || 'https://sistemazoolgicoapi.azurewebsites.net/api',
   headers: {
     'Content-Type': 'application/json'
   }

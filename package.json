@@ -2,7 +2,7 @@
   "name": "zoo-management-client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5098",
+
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -14,9 +14,11 @@
     "react-router": "^7.5.0",
     "react-router-dom": "^7.5.0",
     "react-scripts": "5.0.1",
-    "recharts": "^2.15.2",
-    "web-vitals": "^2.1.4"
-  },
+    "web-vitals": "^2.1.4",
+    "axios": "^1.8.4"
+},
+
+
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
