@@ -29,8 +29,8 @@ const CuidadoAnimalList = () => {
       ]);
       
       setCuidado(cuidadoData);
-      setAnimaisAssociados(animaisAssociadosData);
-      setTodosAnimais(todosAnimaisData);
+      setAnimaisAssociados(animaisAssociadosData?.$values ?? []);
+      setTodosAnimais(todosAnimaisData?.$values ?? []); // 👈 AQUI!
     } catch (err) {
       setError('Falha ao carregar os dados.');
     } finally {
@@ -78,20 +78,56 @@ const CuidadoAnimalList = () => {
     }
   };
 
-  // Estas funções precisariam ser implementadas no serviço
   const addAnimalToCuidado = async (cuidadoId, animalId) => {
-    // Implementação pendente - você precisaria criar estas funções no serviço
-    console.log(`Adicionar animal ${animalId} ao cuidado ${cuidadoId}`);
-    // Simulando sucesso para este exemplo
-    return Promise.resolve();
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/cuidados/${cuidadoId}/animais/${animalId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (response.ok) {
+        showNotification('Animal adicionado com sucesso!');
+        fetchData(); // Recarregar dados
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || 'Erro ao adicionar o animal');
+      }
+    } catch (err) {
+      setError('Falha ao adicionar animal ao cuidado.');
+    } finally {
+      setLoading(false);
+      setAnimalSelecionado(''); // Limpar seleção
+    }
   };
+  
 
   const removeAnimalFromCuidado = async (cuidadoId, animalId) => {
-    // Implementação pendente - você precisaria criar estas funções no serviço
-    console.log(`Remover animal ${animalId} do cuidado ${cuidadoId}`);
-    // Simulando sucesso para este exemplo
-    return Promise.resolve();
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/cuidados/${cuidadoId}/animais/${animalId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (response.ok) {
+        showNotification('Animal removido com sucesso!');
+        fetchData(); // Recarregar dados
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || 'Erro ao remover o animal');
+      }
+    } catch (err) {
+      setError('Falha ao remover animal do cuidado.');
+    } finally {
+      setLoading(false);
+    }
   };
+  
 
   if (loading && !cuidado) return <Spinner />;
   if (error) return <ErrorMessage message={error} />;

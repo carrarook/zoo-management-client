@@ -1,129 +1,210 @@
-/* Estilos gerais da seção */
-.animal-cuidados-section {
-    margin: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
+/* src/styles/components/animal.css */
+
+:root {
+  /* Light Mode Colors */
+  --bg-color: #ffffff;
+  --text-color: #000000; /* Preto no light mode */
+  --primary-color: #3498db;
+  --header-bg: #f8f9fa;
+  --header-text: #000000; /* Preto */
+  --table-bg: #ffffff; /* Branco */
+  --table-header-bg: #f1f1f1; /* Cinza claro */
+  --table-header-text: #000000; /* Preto */
+  --table-row-bg: #ffffff; /* Branco */
+  --table-row-text: #333333; /* Cinza escuro */
+  --table-row-hover: #f5f5f5; /* Cinza muito claro */
+  --table-border: #e0e0e0; /* Cinza claro */
+  --no-data-bg: #f8f9fa;
+  --no-data-text: #666666;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode {
+  /* Dark Mode Colors */
+  --bg-color: #222222; /* Preto quase puro */
+  --text-color: #ffffff; /* Branco */
+  --primary-color: #4ecca3;
+  --header-bg: #1e1e1e;
+  --header-text: #ffffff; /* Branco */
+  --table-bg: #222222; /* Preto como solicitado */
+  --table-header-bg: #222222; /* Cinza escuro */
+  --table-header-text: #ffffff; /* Branco */
+  --table-row-bg: #222222; /* Preto */
+  --table-row-text: #e0e0e0; /* Cinza claro */
+  --table-row-hover: #1e1e1e; /* Preto mais claro */
+  --table-border: #333333;
+  --no-data-bg: #1e1e1e;
+  --no-data-text: #aaaaaa;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+.animal-list-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background-color: var(--header-bg);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.header-actions h1 {
+  color: var(--header-text);
+  font-size: 1.8rem;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.no-data-message {
+  text-align: center;
+  padding: 2rem;
+  background-color: var(--no-data-bg);
+  border-radius: 8px;
+  color: var(--no-data-text);
+  font-size: 1.1rem;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  box-shadow: 0 2px 10px var(--shadow-color);
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--table-bg);
+  transition: background-color 0.3s ease;
+}
+
+.data-table thead {
+  background-color: var(--table-header-bg) !important;
+  color: var(--table-header-text) !important;
+  transition: all 0.3s ease;
+}
+
+.data-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 500;
+  background-color: var(--table-header-bg);
+  color: var(--table-header-text);
+}
+
+.data-table tbody tr {
+  border-bottom: 1px solid var(--table-border);
+  transition: all 0.3s ease;
+  background-color: var(--table-row-bg);
+  color: var(--table-row-text);
+}
+
+.data-table tbody tr:hover {
+  background-color: var(--table-row-hover);
+}
+
+.data-table td {
+  padding: 1rem;
+  transition: color 0.3s ease;
+}
+
+/* ... (mantenha o restante do CSS igual ao anterior) ... */
+
+.data-table td {
+  padding: 1rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.btn-sm {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  filter: brightness(0.9);
+}
+
+.btn-info {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.btn-info:hover {
+  filter: brightness(0.9);
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.btn-warning:hover {
+  filter: brightness(0.9);
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn-danger:hover {
+  filter: brightness(0.9);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .animal-list-container {
+    padding: 1rem;
   }
   
-  .animal-cuidados-section h2 {
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: #333;
+  .data-table th,
+  .data-table td {
+    padding: 0.75rem 0.5rem;
   }
   
-  /* Estilo do formulário de adição de cuidado */
-  .add-cuidado-form {
-    margin-bottom: 20px;
+  .actions {
+    flex-direction: column;
+    gap: 0.25rem;
   }
   
-  .form-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .form-control {
-    padding: 8px;
-    width: 60%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-  }
-  
-  button.btn {
-    padding: 10px 20px;
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  button.btn-success {
-    background-color: #28a745;
-    color: white;
-  }
-  
-  button.btn-success:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-  }
-  
-  button.btn-danger {
-    background-color: #dc3545;
-    color: white;
-  }
-  
-  button.btn-sm {
-    padding: 5px 10px;
-    font-size: 12px;
-  }
-  
-  /* Estilo da tabela de cuidados associados */
-  .table-responsive {
-    max-width: 100%;
-    overflow-x: auto;
-  }
-  
-  .data-table {
+  .btn-sm {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
   }
-  
-  .data-table th, .data-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .data-table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .data-table tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .no-data-message {
-    font-size: 16px;
-    color: #888;
-    margin-top: 20px;
-  }
-  
-  /* Estilo do dialog de confirmação */
-  .confirm-dialog {
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .confirm-dialog button {
-    margin: 5px;
-  }
-  
-  .confirm-dialog .confirm-button {
-    background-color: #28a745;
-    color: white;
-  }
-  
-  .confirm-dialog .cancel-button {
-    background-color: #dc3545;
-    color: white;
-  }
-  
-  /* Mensagens de erro e notificação */
-  .error-message {
-    color: #dc3545;
-    font-size: 14px;
-    margin-top: 10px;
-  }
-  
-  .success-message {
-    color: #28a745;
-    font-size: 14px;
-    margin-top: 10px;
-  }
-  
+}

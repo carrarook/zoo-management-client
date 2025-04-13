@@ -59,6 +59,8 @@ const AnimalCuidadoList = ({ animalId, animalCuidados, allCuidados }) => {
     }
   };
 
+  
+
   const cancelRemove = () => {
     setConfirmDialogOpen(false);
     setCuidadoToRemove(null);
@@ -72,6 +74,8 @@ const AnimalCuidadoList = ({ animalId, animalCuidados, allCuidados }) => {
     return safeAllCuidados.find(c => c.id === ac.cuidadoId) || { id: ac.cuidadoId, nome: 'Cuidado não encontrado' };
   });
 
+
+  
   return (
     <div className="animal-cuidados-section">
       <h2>Cuidados do Animal</h2>
@@ -89,8 +93,10 @@ const AnimalCuidadoList = ({ animalId, animalCuidados, allCuidados }) => {
               <option key={cuidado.id} value={cuidado.id}>
                 {cuidado.nome}
               </option>
+
             ))}
           </select>
+          
           <button 
             type="button" 
             onClick={handleAddCuidado}

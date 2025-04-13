@@ -21,10 +21,19 @@ const CuidadoDetails = () => {
     try {
       const cuidadoData = await getCuidado(id);
       setCuidado(cuidadoData);
-      
+
       const animaisData = await getAnimaisPorCuidado(id);
-      setAnimais(animaisData);
+
+      // Trata a estrutura com $values, se houver
+      const animaisConvertidos = animaisData?.$values
+        ? animaisData.$values
+        : Array.isArray(animaisData)
+        ? animaisData
+        : [];
+
+      setAnimais(animaisConvertidos);
     } catch (err) {
+      console.error(err);
       setError('Falha ao carregar os detalhes do cuidado.');
     } finally {
       setLoading(false);
@@ -54,21 +63,21 @@ const CuidadoDetails = () => {
           <strong>Nome:</strong>
           <span>{cuidado.nome}</span>
         </div>
-        
+
         <div className="detail-item">
           <strong>Frequência:</strong>
           <span>{cuidado.frequencia}</span>
         </div>
-        
+
         <div className="detail-item full-width">
           <strong>Descrição:</strong>
           <p className="description">{cuidado.descricao || 'Sem descrição disponível.'}</p>
         </div>
       </div>
-      
+
       <div className="related-data-section">
         <h2>Animais que Recebem este Cuidado</h2>
-        
+
         {animais.length === 0 ? (
           <p className="no-data-message">Nenhum animal associado a este cuidado.</p>
         ) : (
@@ -83,7 +92,7 @@ const CuidadoDetails = () => {
                 </tr>
               </thead>
               <tbody>
-                {animais.map(animal => (
+                {animais.map((animal) => (
                   <tr key={animal.id}>
                     <td>{animal.nome}</td>
                     <td>{animal.especie}</td>

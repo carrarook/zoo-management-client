@@ -21,7 +21,9 @@ const CuidadoList = () => {
     setLoading(true);
     try {
       const data = await getCuidados();
-      setCuidados(data);
+      // Se a resposta da API vem com "$values", extraímos
+      const listaCuidados = data?.$values || [];
+      setCuidados(listaCuidados);
     } catch (err) {
       setError('Falha ao carregar a lista de cuidados.');
     } finally {
@@ -54,6 +56,9 @@ const CuidadoList = () => {
     setCuidadoToDelete(null);
   };
 
+  const getAnimalCuidados = (cuidado) =>
+    Array.isArray(cuidado?.animalCuidados?.$values) ? cuidado.animalCuidados.$values : [];
+
   if (loading && cuidados.length === 0) return <Spinner />;
   if (error) return <ErrorMessage message={error} />;
 
@@ -65,7 +70,7 @@ const CuidadoList = () => {
           Adicionar Novo Cuidado
         </Link>
       </div>
-      
+
       {cuidados.length === 0 ? (
         <p className="no-data-message">Nenhum cuidado cadastrado.</p>
       ) : (
@@ -84,7 +89,7 @@ const CuidadoList = () => {
                 <tr key={cuidado.id}>
                   <td>{cuidado.nome}</td>
                   <td>{cuidado.frequencia}</td>
-                  <td>{cuidado.animalCuidados?.length || 0}</td>
+                  <td>{getAnimalCuidados(cuidado).length}</td>
                   <td className="actions">
                     <Link to={`/cuidados/${cuidado.id}`} className="btn btn-sm btn-info">
                       Detalhes
@@ -92,8 +97,8 @@ const CuidadoList = () => {
                     <Link to={`/cuidados/editar/${cuidado.id}`} className="btn btn-sm btn-warning">
                       Editar
                     </Link>
-                    <button 
-                      onClick={() => handleDeleteClick(cuidado)} 
+                    <button
+                      onClick={() => handleDeleteClick(cuidado)}
                       className="btn btn-sm btn-danger"
                     >
                       Excluir
@@ -105,8 +110,8 @@ const CuidadoList = () => {
           </table>
         </div>
       )}
-      
-      <ConfirmDialog 
+
+      <ConfirmDialog
         isOpen={confirmDialogOpen}
         title="Confirmar Exclusão"
         message={`Tem certeza que deseja excluir o cuidado ${cuidadoToDelete?.nome}?`}

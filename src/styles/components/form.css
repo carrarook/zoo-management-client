@@ -1,0 +1,260 @@
+/* src/styles/components/animal.css */
+
+:root {
+  /* Light Mode Colors */
+  --form-bg: #ffffff;
+  --form-text: #2c3e50;
+  --form-border: #e0e0e0;
+  --form-label: #7f8c8d;
+  --form-input-bg: #f8f9fa;
+  --form-input-text: #34495e;
+  --form-input-focus: #3498db;
+  --form-error: #e74c3c;
+  --form-primary-btn: #3498db;
+  --form-secondary-btn: #95a5a6;
+  --form-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --form-section-bg: rgba(245, 245, 245, 0.5);
+  --form-radius: 12px;
+  --form-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.dark-mode {
+  /* Dark Mode Colors */
+  --form-bg: #222222;
+  --form-text: #ecf0f1;
+  --form-border: #2c3e50;
+  --form-label: #bdc3c7;
+  --form-input-bg: #2c3e50;
+  --form-input-text: #ecf0f1;
+  --form-input-focus: #4ecca3;
+  --form-error: #ff7675;
+  --form-primary-btn: #4ecca3;
+  --form-secondary-btn: #7f8c8d;
+  --form-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  --form-section-bg: rgba(30, 30, 30, 0.3);
+}
+
+/* Container Principal */
+.animal-form-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background-color: var(--form-bg);
+  color: var(--form-text);
+  border-radius: var(--form-radius);
+  box-shadow: var(--form-shadow);
+  transition: var(--form-transition);
+}
+
+/* Título do Formulário */
+.animal-form-container h1 {
+  color: var(--form-text);
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.animal-form-container h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: var(--form-primary-btn);
+  border-radius: 3px;
+}
+
+/* Estrutura do Formulário */
+.data-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+/* Seções do Formulário */
+.form-section {
+  padding: 1.8rem;
+  border-radius: var(--form-radius);
+  background-color: var(--form-section-bg);
+  border: 1px solid var(--form-border);
+  transition: var(--form-transition);
+}
+
+.form-section-title {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  color: var(--form-primary-btn);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Grupos de Campos */
+.form-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.7rem;
+  font-weight: 500;
+  color: var(--form-label);
+  font-size: 0.95rem;
+}
+
+/* Campos de Input */
+.form-control {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  background-color: var(--form-input-bg);
+  color: var(--form-input-text);
+  border: 1px solid var(--form-border);
+  border-radius: 8px;
+  transition: var(--form-transition);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--form-input-focus);
+  box-shadow: 0 0 0 3px rgba(78, 204, 163, 0.15);
+}
+
+/* Campos Inválidos */
+.form-control.is-invalid {
+  border-color: var(--form-error);
+}
+
+.invalid-feedback {
+  color: var(--form-error);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.invalid-feedback::before {
+  content: '⚠';
+}
+
+/* Textarea */
+textarea.form-control {
+  min-height: 140px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+/* Grupos com Múltiplos Campos */
+.multi-field-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Ações do Formulário */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px dashed var(--form-border);
+}
+
+/* Botões */
+.btn {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--form-transition);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-primary {
+  background-color: var(--form-primary-btn);
+  color: white;
+  box-shadow: 0 4px 12px rgba(52, 156, 219, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(52, 156, 219, 0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--form-secondary-btn);
+  border: 1px solid var(--form-secondary-btn);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(149, 165, 166, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .animal-form-container {
+    padding: 1.75rem;
+    margin: 1rem;
+  }
+  
+  .form-section {
+    padding: 1.2rem;
+  }
+  
+  .multi-field-group {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-actions {
+    flex-direction: column-reverse;
+    gap: 1rem;
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 0.9rem;
+  }
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animal-form-container {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+.form-control.is-invalid {
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}

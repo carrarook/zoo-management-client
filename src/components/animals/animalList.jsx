@@ -47,7 +47,20 @@ const AnimalList = () => {
       setAnimais(animais.filter(animal => animal.id !== animalToDelete.id));
       showNotification(`Animal ${animalToDelete.nome} excluído com sucesso!`);
     } catch (err) {
-      setError('Falha ao excluir o animal.');
+      setError(
+
+        <div>
+        <p>Falha ao excluir o animal.</p>
+        <button 
+          onClick={() => window.location.href = '/'} //reseta os componentes
+          className="btn btn-primary"
+          style={{ marginTop: '10px' }}
+        >
+          Voltar para Home
+        </button>
+      </div>
+        
+      );
     } finally {
       setLoading(false);
       setConfirmDialogOpen(false);

@@ -5,7 +5,7 @@ import { useAppContext } from '../../context/appContext';
 import Spinner from '../shared/Spinner';
 import ErrorMessage from '../shared/ErrorMessage';
 import { validateCuidado } from '../../utils/validation';
-import '../../styles/components/cuidado.css';
+import '../../styles/components/form.css';
 
 const CuidadoForm = () => {
   const { id } = useParams();

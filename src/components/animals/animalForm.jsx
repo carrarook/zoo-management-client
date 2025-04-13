@@ -7,7 +7,7 @@ import Spinner from '../shared/Spinner';
 import ErrorMessage from '../shared/ErrorMessage';
 import AnimalCuidadoList from './animalCuidadoList';
 import { validateAnimal } from '../../utils/validation';
-import '../../styles/components/animal.css';
+import '../../styles/components/form.css';
 
 const AnimalForm = () => {
   const { id } = useParams();
@@ -25,6 +25,7 @@ const AnimalForm = () => {
   });
 
   const [cuidados, setCuidados] = useState([]);
+  
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -33,7 +34,9 @@ const AnimalForm = () => {
       try {
         // Carregar lista de cuidados
         const cuidadosData = await getCuidados();
-        setCuidados(cuidadosData);
+        const cuidadosFormatados = cuidadosData?.$values || cuidadosData || [];
+        setCuidados(cuidadosFormatados);
+        
 
         // Se for modo de edição, carregar dados do animal
         if (isEditMode) {
@@ -43,10 +46,12 @@ const AnimalForm = () => {
           const formattedDate = animalData.dataNascimento ? 
             new Date(animalData.dataNascimento).toISOString().split('T')[0] : '';
           
-          setAnimal({
-            ...animalData,
-            dataNascimento: formattedDate
-          });
+            setAnimal({
+              ...animalData,
+              dataNascimento: formattedDate,
+              animalCuidados: animalData.animalCuidados?.$values || []
+            });
+            
         }
       } catch (err) {
         setError('Falha ao carregar os dados. Por favor, tente novamente.');
