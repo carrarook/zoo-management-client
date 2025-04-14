@@ -33,7 +33,7 @@
   
   /* Card do perfil */
   .profile-card {
-    background-color: var(--card-bg), #7a7979;
+    background-color: var(--card-bg);
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     padding: 2rem;
