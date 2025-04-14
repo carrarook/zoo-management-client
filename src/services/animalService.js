@@ -1,6 +1,22 @@
 import axios from 'axios';
 
-const API_URL = 'https://sistemazoolgicoapi.azurewebsites.net/api';
+//const API_URL = 'https://sistemazoolgicoapi.azurewebsites.net/api'; //Produção
+const API_URL = 'https://localhost:7258/api'; // Testes Locais
+
+
+// dash
+
+
+export const getEspeciesCount = async () => {
+  try {
+    
+    const response = await axios.get(`${API_URL}/animais/contagem-especies`);
+    return response.data; // Retorno direto do número
+  } catch (error) {
+    console.error('Erro ao contar espécies:', error);
+    throw error;
+  }
+};
 
 export const getAnimais = async () => {
   try {
@@ -8,6 +24,16 @@ export const getAnimais = async () => {
     return response.data;
   } catch (error) {
     console.error('Erro ao buscar animais:', error);
+    throw error;
+  }
+};
+
+export const getTotalAnimais = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/animais`);
+    return response.data.$values.length; // Retorna o total de itens no array (objetos + referências)
+  } catch (error) {
+    console.error('Erro ao contar animais:', error);
     throw error;
   }
 };

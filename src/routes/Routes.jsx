@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Layout from '../components/Layout';
+import AuthLayout from '../components/auth/AuthLayout';
 import Dashboard from '../components/Dashboard';
 
 // Animais
@@ -16,12 +17,52 @@ import CuidadoAnimalList from '../components/cares/cuidadoAnimalList';
 
 // Outros
 import NotFound from '../components/NotFound';
+import LoginForm from '../components/auth/LoginForm';
+import SignupForm from '../components/auth/SignupForm';
+import Profile from '../components/Profile';
+
+// Verificação simples de autenticação
+const isAuthenticated = () => {
+  return localStorage.getItem('isAuthenticated') === 'true';
+};
+
+// Componente para rotas protegidas
+const ProtectedRoute = ({ children }) => {
+  if (!isAuthenticated()) {
+    return <Navigate to="/login" />;
+  }
+  return children;
+};
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Dashboard />} />
+      {/* Rotas de autenticação com layout próprio */}
+      <Route element={<AuthLayout />}>
+        <Route 
+          path="/login" 
+          element={
+            isAuthenticated() ? (
+              <Navigate to="/dashboard" replace /> // Redireciona se já logado
+            ) : (
+              <LoginForm />
+            )
+          } 
+        />
+        <Route path="/signup" element={<SignupForm />} />
+      </Route>
+      {/* Redirecionamento da raiz baseado em autenticação */}
+      <Route path="/" element={
+        isAuthenticated() ? <Navigate to="/dashboard" /> : <Navigate to="/login" />
+      } />
+
+      {/* Rotas protegidas com layout principal */}
+      <Route path="/" element={
+        <ProtectedRoute>
+          <Layout />
+        </ProtectedRoute>
+      }>
+        <Route path="dashboard" element={<Dashboard />} />
         
         {/* Rotas de Animais */}
         <Route path="animais">
@@ -30,6 +71,12 @@ const AppRoutes = () => {
           <Route path=":id" element={<AnimalDetails />} />
           <Route path="editar/:id" element={<AnimalForm />} />
         </Route>
+
+        <Route path="/perfil" element={
+        <ProtectedRoute>
+          <Profile />
+        </ProtectedRoute>
+      } />
         
         {/* Rotas de Cuidados */}
         <Route path="cuidados">

@@ -5,7 +5,9 @@ import { getAnimais } from '../../services/animalService';
 import { useAppContext } from '../../context/appContext';
 import Spinner from '../shared/Spinner';
 import ErrorMessage from '../shared/ErrorMessage';
+import { addAnimalToCuidado } from '../../services/cuidadoService'; 
 import '../../styles/components/cuidado.css';
+import { API_URL } from '../../services/cuidadoService';
 
 const CuidadoAnimalList = () => {
   const { id } = useParams();
@@ -48,8 +50,6 @@ const CuidadoAnimalList = () => {
     
     setLoading(true);
     try {
-      // Simulando uma chamada de API para adicionar animal ao cuidado
-      // Você precisaria implementar esta chamada no backend e serviço
       await addAnimalToCuidado(id, animalSelecionado);
       
       showNotification('Animal adicionado com sucesso!');
@@ -65,8 +65,6 @@ const CuidadoAnimalList = () => {
   const handleRemoveAnimal = async (animalId) => {
     setLoading(true);
     try {
-      // Simulando uma chamada de API para remover animal do cuidado
-      // Você precisaria implementar esta chamada no backend e serviço
       await removeAnimalFromCuidado(id, animalId);
       
       showNotification('Animal removido com sucesso!');
@@ -78,36 +76,12 @@ const CuidadoAnimalList = () => {
     }
   };
 
-  const addAnimalToCuidado = async (cuidadoId, animalId) => {
-    setLoading(true);
-    try {
-      const response = await fetch(`/api/cuidados/${cuidadoId}/animais/${animalId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-  
-      if (response.ok) {
-        showNotification('Animal adicionado com sucesso!');
-        fetchData(); // Recarregar dados
-      } else {
-        const errorData = await response.json();
-        setError(errorData.message || 'Erro ao adicionar o animal');
-      }
-    } catch (err) {
-      setError('Falha ao adicionar animal ao cuidado.');
-    } finally {
-      setLoading(false);
-      setAnimalSelecionado(''); // Limpar seleção
-    }
-  };
-  
+  //apis
 
   const removeAnimalFromCuidado = async (cuidadoId, animalId) => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/cuidados/${cuidadoId}/animais/${animalId}`, {
+      const response = await fetch(`${API_URL}/api/cuidados/${cuidadoId}/animais/${animalId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

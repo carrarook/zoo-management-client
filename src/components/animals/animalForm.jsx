@@ -70,7 +70,7 @@ const AnimalForm = () => {
       [name]: value
     }));
     
-    // Limpa o erro específico do campo quando o usuário começa a digitar
+    // Limpa o erro específico do campo quando o usr começa a digitar
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -200,7 +200,7 @@ const AnimalForm = () => {
           <button 
             type="button" 
             className="btn btn-secondary"
-            onClick={() => navigate('/animais')}
+          //  onClick={() => navigate('/animais')}
           >
             Cancelar
           </button>

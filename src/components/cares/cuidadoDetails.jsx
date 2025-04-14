@@ -4,7 +4,7 @@ import { getCuidado, getAnimaisPorCuidado } from '../../services/cuidadoService'
 import { useAppContext } from '../../context/appContext';
 import Spinner from '../shared/Spinner';
 import ErrorMessage from '../shared/ErrorMessage';
-import '../../styles/components/cuidado.css';
+import '../../styles/components/details.css';
 
 const CuidadoDetails = () => {
   const { id } = useParams();

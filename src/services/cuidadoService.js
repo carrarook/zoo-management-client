@@ -1,6 +1,43 @@
 import axios from 'axios';
 
-const API_URL = 'https://sistemazoolgicoapi.azurewebsites.net/api';
+//export const API_URL = 'https://sistemazoolgicoapi.azurewebsites.net/api'; //Produção
+export const API_URL = 'https://localhost:7258/api'; // Testes Locais
+
+
+// dash
+
+export const getCuidadosCount = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/cuidados`);
+    const data = response.data;
+    
+    // Extrai todos os IDs de cuidados únicos
+    const uniqueCuidadosIds = new Set();
+    
+    // Processa o array principal ($values)
+    data.$values.forEach(cuidado => {
+      if (cuidado.id) {
+        uniqueCuidadosIds.add(cuidado.id);
+      }
+    });
+    
+
+    const refs = data.$values
+      .filter(item => item.$ref)
+      .map(ref => {
+        const refId = ref.$ref.split('_')[1]; 
+        return parseInt(refId);
+      });
+    
+    refs.forEach(id => uniqueCuidadosIds.add(id));
+    
+    return uniqueCuidadosIds.size;
+  } catch (error) {
+    console.error('Erro ao contar cuidados:', error);
+    throw error;
+  }
+};
+
 
 export const getCuidados = async () => {
   try {
@@ -61,3 +98,14 @@ export const getAnimaisPorCuidado = async (id) => {
     throw error;
   }
 };
+
+export const addAnimalToCuidado = async (cuidadoId, animalId) => {
+  try {
+    const response = await axios.post(`${API_URL}/cuidados/${cuidadoId}/animais/${animalId}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Erro ao adicionar animal ao cuidado:`, error);
+    throw error;
+  }
+};
+
