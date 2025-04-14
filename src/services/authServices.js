@@ -4,6 +4,8 @@ import axios from 'axios';
 const API_URL = 'https://sistemazoolgicoapi.azurewebsites.net/api'; //Produção
 //const API_URL = 'https://localhost:7258/api'; // Testes Locais
 
+
+
 const AuthService = {
   // Login de usuário
   login: async (email, senha) => {

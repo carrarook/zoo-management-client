@@ -21,49 +21,22 @@ import LoginForm from '../components/auth/LoginForm';
 import SignupForm from '../components/auth/SignupForm';
 import Profile from '../components/Profile';
 
-// Verificação simples de autenticação
-const isAuthenticated = () => {
-  return localStorage.getItem('isAuthenticated') === 'true';
-};
-
-// Componente para rotas protegidas
-const ProtectedRoute = ({ children }) => {
-  if (!isAuthenticated()) {
-    return <Navigate to="/login" />;
-  }
-  return children;
-};
-
 const AppRoutes = () => {
   return (
     <Routes>
       {/* Rotas de autenticação com layout próprio */}
       <Route element={<AuthLayout />}>
-        <Route 
-          path="/login" 
-          element={
-            isAuthenticated() ? (
-              <Navigate to="/dashboard" replace /> // Redireciona se já logado
-            ) : (
-              <LoginForm />
-            )
-          } 
-        />
+        <Route path="/login" element={<LoginForm />} />
         <Route path="/signup" element={<SignupForm />} />
       </Route>
-      {/* Redirecionamento da raiz baseado em autenticação */}
-      <Route path="/" element={
-        isAuthenticated() ? <Navigate to="/dashboard" /> : <Navigate to="/login" />
-      } />
 
-      {/* Rotas protegidas com layout principal */}
-      <Route path="/" element={
-        <ProtectedRoute>
-          <Layout />
-        </ProtectedRoute>
-      }>
+      {/* Redirecionar raiz para dashboard */}
+      <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
+      {/* Rotas públicas com layout principal */}
+      <Route path="/" element={<Layout />}>
         <Route path="dashboard" element={<Dashboard />} />
-        
+
         {/* Rotas de Animais */}
         <Route path="animais">
           <Route index element={<AnimalList />} />
@@ -72,12 +45,6 @@ const AppRoutes = () => {
           <Route path="editar/:id" element={<AnimalForm />} />
         </Route>
 
-        <Route path="/perfil" element={
-        <ProtectedRoute>
-          <Profile />
-        </ProtectedRoute>
-      } />
-        
         {/* Rotas de Cuidados */}
         <Route path="cuidados">
           <Route index element={<CuidadoList />} />
@@ -86,8 +53,9 @@ const AppRoutes = () => {
           <Route path=":id/animais" element={<CuidadoAnimalList />} />
           <Route path="editar/:id" element={<CuidadoForm />} />
         </Route>
-        
-        {/* Página 404 */}
+
+        {/* Perfil e NotFound (também públicos) */}
+        <Route path="perfil" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
