@@ -8,10 +8,14 @@ const AuthService = {
   // Login de usuário
   login: async (email, senha) => {
     try {
-      const response = await axios.post(`${API_URL}/Auth/login`, {
+      const response = await axios.post(`${API_URL}/auth/login`, {
         email,
         senha
-      });
+      },
+      {
+        withCredentials: true 
+      }
+    );
       
       if (response.data) {
         // Salvar informações do usuário no localStorage
@@ -28,11 +32,15 @@ const AuthService = {
   // Registro de novo usuário
   register: async (nome, email, senha) => {
     try {
-      const response = await axios.post(`${API_URL}/Auth/register`, {
+      const response = await axios.post(`${API_URL}/auth/register`, {
         nome,
         email,
         senha
-      });
+      },
+      {
+        withCredentials: true // <- adiciona aqui também, se necessário
+      }
+    );
       
       return response.data;
     } catch (error) {
