@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+🦁 Sistema de Controle Zoológico - Backend
+Backend da aplicação de gerenciamento de animais e cuidados, desenvolvido em .NET 9 com banco de dados SQLite.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+👉 Frontend: [sistemazoologicofront.vercel.app](https://sistemazoologicofront.vercel.app/)
 
-## Available Scripts
+📦 Repositório do Frontend: [zoo-management-client](https://github.com/carrarook/zoo-management-client)
 
-In the project directory, you can run:
+📦 Repositório do Back: [Sistema_Controle_Zoologico_BackEnd](https://github.com/carrarook/Sistema_Controle_Zoologico_BackEnd)
 
-### `npm start`
+-------- Funcionalidades -------- 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* Cadastrar animais
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* Cadastrar cuidados
 
-### `npm test`
+* Relacionar cuidados aos animais
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* Dashboard com informações resumidas
 
-### `npm run build`
+-------- Tecnologias -------- 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* .NET 9
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* Entity Framework Core
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* SQLite
 
-### `npm run eject`
+* API REST
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+-------- Problemas conhecidos -------- 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+❗ Login/Signup foi removido temporariamente devido a erro de CORS no Azure (funciona localmente).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+⚠️ SQLite no Azure Free Tier não persiste dados em alguns casos.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+-------- Melhorias futuras -------- 
 
-## Learn More
+* Corrigir CORS para login no Azure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* Trocar SQLite por banco com persistência garantida
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* Implementar autenticação completa
 
-### Code Splitting
+-------- Como rodar localmente --------
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. Clone o backend e o frontend
+2. No frontEnd, altere o endereço da API nos arquivos Services (apenas descomentar o teste e comentar a produção), confira o endereço local e altere para sua porta se diferente
+3. Certifique-se de quem todas as bibliotecas necessárias, assim como o .net
+4. Rode o .net (Atente-se a porta que está rodando)
+5. rode o front ent (npm start)
+6. Se quiser conferir as funcionalidades que funcionam localmente, troque o routes.jsx pelo arquivo .txt na mesma pasta
+7. Thanks
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
